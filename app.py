@@ -1,5 +1,6 @@
 import streamlit as st
 import time
+import downloder
 def main():
     title, mid, logo = st.columns([40,1,40])
     with title:
@@ -10,11 +11,38 @@ def main():
     
     txt_input, btn = st.columns([10,1])
     
-    st.text_input("Enter URL")
+    txt =st.text_input("Enter URL")
     
     if st.button("Process link"):
-        with st.spinner("Processing..."):
-            time.sleep(5)
+        if txt== '':
+            st.warning('enter a url')
+        else:
+            with st.spinner("Processing..."):
+                try:
+                    url = downloder.Get_res(txt)
+                    d_vid, pic = st.columns([1,4])
+                    with d_vid:
+                        if url.r_144p()==None:
+                            st.button(label="144p not available", disabled=True)
+                        else:
+                            if st.button(label="144p res"):
+                                url.r_144p().download()
+
+                        if url.r_360p()==None:
+                            st.button(label="360p not available", disabled=True)
+                        else:
+                            st.button(label="360p res")
+
+                        if url.r_720p()==None:
+                            st.button(label="720p not available", disabled=True)
+                        else:
+                            st.button(label="720p res")
+                    with pic:
+                        st.image(url.thumb_nail())
+
+                except:
+                    st.warning("Enter a valid URL")
+                
         st.success("Done")
 
 

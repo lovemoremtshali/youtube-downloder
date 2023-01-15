@@ -12,8 +12,9 @@ def main():
     txt_input, btn = st.columns([10,1])
     
     txt =st.text_input("Enter URL")
-    
-    if st.button("Process link"):
+    if 'state' not in st.session_state:
+        st.session_state['state']=False
+    if (st.button("Process link",on_click=callback) or st.session_state.state):
         if txt== '':
             st.warning('enter a url')
         else:
@@ -46,7 +47,8 @@ def main():
         st.success("Done")
 
 
-
+def callback():
+    st.session_state.state = True
 
 
 

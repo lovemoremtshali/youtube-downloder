@@ -21,28 +21,53 @@ def main():
             with st.spinner("Processing..."):
                 try:
                     url = downloder.Get_res(txt)
-                    d_vid, pic = st.columns([1,4])
+                    d_vid,aud, pic = st.columns([1,1,4])
                     with d_vid:
+                        st.write("### Videos")
                         if url.r_144p()==None:
                             st.button(label="144p not available", disabled=True)
                         else:
                             if st.button(label="144p res"):
                                 url.r_144p().download()
+                                #st.experimental_rerun()
 
                         if url.r_360p()==None:
                             st.button(label="360p not available", disabled=True)
                         else:
-                            st.button(label="360p res")
+                            if st.button(label="360p res"):
+                                url.r_360p().download()
 
                         if url.r_720p()==None:
                             st.button(label="720p not available", disabled=True)
                         else:
-                            st.button(label="720p res")
+                            if st.button(label="720p res"):
+                                url.r_720p().download()
+                    with aud:
+                        st.write("### Audio")
+                        if url.a_50()==None:
+                            st.button(label="50kbps not available", disabled=True)
+                        else:
+                            if st.button(label="50kbps"):
+                                url.a_50p().download()
+
+                        if url.a_70()==None:
+                            st.button(label="70kbps not available", disabled=True)
+                        else:
+                            if st.button(label="70kbps"):
+                                url.a_70().download()
+
+                        if url.a_128()==None:
+                            st.button(label="128kbps not available", disabled=True)
+                        else:
+                            if st.button(label="120kbps"):
+                                url.a_128().download()                        
                     with pic:
                         st.image(url.thumb_nail())
+                        st.write(url.title())
 
                 except:
                     st.warning("Enter a valid URL")
+                
                 
         st.success("Done")
 

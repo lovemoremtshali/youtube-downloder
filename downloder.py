@@ -30,6 +30,5 @@ class Get_res:
         return self.yt.filter(progressive=False, type="audio", abr="50kbps").last()
     def a_70(self):
         return self.yt.filter(progressive=False, type="audio", abr="70kbps").last()
-    
 
 

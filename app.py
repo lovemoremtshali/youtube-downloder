@@ -10,7 +10,7 @@ def main():
         st.image("logo.png")
     
     txt_input, btn = st.columns([10,1])
-    
+    print("hey")
     txt =st.text_input("Enter URL")
     if 'state' not in st.session_state:
         st.session_state['state']=False
@@ -20,8 +20,11 @@ def main():
         else:
             with st.spinner("Processing..."):
                 try:
+                    print(1)
                     url = downloder.Get_res(txt)
+                    print(1)
                     d_vid,aud, pic = st.columns([1,1,4])
+                    print(1)
                     with d_vid:
                         st.write("### Videos")
                         if url.r_144p()==None:
